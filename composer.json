@@ -1,0 +1,51 @@
+{
+    "name": "sixmonkey/some-custom-field",
+    "type": "shopware-platform-plugin",
+    "description": "Adds some custom field to products",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ben Kremer",
+            "email": "hallo@benkremer.de"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "shopware/core": "^6.3"
+    },
+    "require-dev": {
+        "brainmaestro/composer-git-hooks": "^2.8",
+        "ergebnis/composer-normalize": "^2.13",
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "phpunit/phpunit": "^9.5"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "extra": {
+        "shopware-plugin-class": "Sixmonkey\\SomeCustomField\\Plugin",
+        "label": {
+            "de-DE": "Der angezeigte lesbare Name für das Plugin",
+            "en-GB": "The displayed readable name for the plugin"
+        },
+        "description": {
+            "de-DE": "Beschreibung in der Administration für das Plugin",
+            "en-GB": "Description in the administration for this plugin"
+        },
+        "hooks": {
+            "post-merge": [
+                "composer install --ignore-platform-reqs"
+            ],
+            "pre-commit": [
+                "vendor/bin/php-cs-fixer fix",
+                "composer normalize"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sixmonkey\\SomeCustomField\\": "src/"
+        }
+    }
+}
